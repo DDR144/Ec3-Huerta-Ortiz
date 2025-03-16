@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Descuento</title>
+    <link th:href="@{/css/bootstrap/bootstrap.css}" rel="stylesheet">
+</head>
+<body>
+<div class="card">
+  <div class="card-header">
+    CALCULADORA DE DESCUENTO
+  </div>
+  <div class="card-body">
+    <form th:action="@{/calcularDescuento}" method="post" th:object="${cliente}">
+      <div class="mb-3">
+        <label for="txtsubtotal" class="form-label">Ingrese el Sub-total a pagar:</label>
+        <input type="number" th:field="*{totalParcial}" class="form-control" id="txtsubtotal" placeholder="SUB-TOTAL">
+      </div>
+      <div class="mb-3">
+        <label for="txtanios" class="form-label">Ingrese su antiguedad en años:</label>
+        <input type="number" th:field="*{aniosCliente}" class="form-control" id="txtanios" placeholder="AÑOS">
+      </div>
+      <button type="submit" class="btn btn-warning">CALCULAR</button>
+    </form>
+    <br>
+    <div class="alert alert-warning" role="alert">
+      <span th:text="${resultado} ?: ''"></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
