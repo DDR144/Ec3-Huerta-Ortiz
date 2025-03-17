@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Alinea los elementos al principio */
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center; /* Centra el título */
+            margin-top: 20px; /* Añade un poco de espacio en la parte superior */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+    <title>Calcular Impuesto</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+<h2>CALCULAR IMPUESTO SEGUN CATEGORIA</h2>
+<form th:action="@{/calcularimpuesto}" method="post" th:object="${impuestomodel}">
+    <div class="mb-3">
+        <label class="form-label">PRECIO DEL PRODUCTO S/.</label>
+        <input type="number" th:field="*{monto}" step="0.01" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">CATEGORIA DEL PRODUCTO</label>
+        <select th:field="*{categoria}" class="form-select">
+            <option value="electronica">Electronica - 15%</option>
+            <option value="alimentos">Alimentos - 5%</option>
+            <option value="ropa">Ropa - 8%</option>
+            <option value="muebles">Muebles - 10%</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">CALCULAR</button>
+</form>
+
+<div th:if="${resultado} ?: ''" class="alert alert-success mt-3">
+    <h4>El calculo se realizo correctamente.</h4>
+    <h4>Precio con Impuesto: S/. <span th:text="${resultado} "></span></h4>
+
+</div>
+
+</body>
+</html>
